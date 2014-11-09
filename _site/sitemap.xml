@@ -48,6 +48,10 @@
 
     
     <url>
+        <loc>/build-by-jekyll/</loc>
+    </url>
+    
+    <url>
         <loc>/softirq_and_tasklet/</loc>
     </url>
     

@@ -1,29 +1,18 @@
 ---
 layout: post
-title: "softirq and tasklet"
-description: "Example and code for using link posts."
-tags: [sample post, link post]
+title: "软终端与tasklet"
+description: "tasklet是基于软中断实现的"
+tags: [tasklet, softirq, linux kernel]
 comments: true
-link: http://mademistakes.com  
 ---
-# 软中断与tasklet
-标签：softirqs tasklet
 
----
 
 Folow me: <i class="icon-github icon-2x"></i>  [zhaonanyu](http://github.com/zhaonanyu)
 Contact me: **zhaonanyu@gmail.com**
 
 
 ----------
-~~~c
-include<stdio.h>
 
-int main()
-{
-	printf("hello");
-}
-~~~
 
 >**下半部**
 *下半部的任务就是执行与终端处理密切相关但中断处理程序本身不执行的工作。在理想的情况下，最好是中断处理程序将所有工作都交给下半部分执行，因为我们希望在终端处理程序中完成的工作越少越好（也就是越快乐好）。我们抢终端处理程序能够尽可能快地返回。*——***《Linux内核设计与实现》***
@@ -50,6 +39,7 @@ struct softirq_action
 《Linux内核设计与实现》中说明了：
 
 >kernel/softirq.c中定义了一个包含32个该结构体的数组。
+
 >~~~c
 static struct softirq_action softirq_vec[NR_SOFTIRQS];
 >~~~

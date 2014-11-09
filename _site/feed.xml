@@ -1,48 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-<title type="text">Site Title</title>
+<title type="text"></title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2014-11-08T09:00:47-05:00</updated>
+<updated>2014-11-09T01:03:51-05:00</updated>
 <id>/</id>
 <author>
-  <name>Your Name</name>
+  <name>zhaonanyu</name>
   <uri>/</uri>
-  <email>you@email.com</email>
+  <email>zhaonanyu@gmail.com</email>
 </author>
 
 
 <entry>
-  <title type="html"><![CDATA[softirq and tasklet]]></title>
- <link rel="alternate" type="text/html" href="http://mademistakes.com" />
+  <title type="html"><![CDATA[动手搭建自己的jekyll静态博客]]></title>
+ <link rel="alternate" type="text/html" href="/build-by-jekyll/" />
+  <id>/build-by-jekyll</id>
+  <published>2014-11-09T00:00:00-05:00</published>
+  <updated>2014-11-09T00:00:00-05:00</updated>
+  <author>
+    <name>zhaonanyu</name>
+    <uri></uri>
+    <email>zhaonanyu@gmail.com</email>
+  </author>
+  <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;动态网站太重了.轻量级的静态网站生成工具一时蔚然成风,至少在开(si)发(ji)者(lao)圈子里如此.–&lt;a href=&quot;http://ipn.li/kernelpanic/&quot;&gt;kernel panic&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;h2 id=&quot;section&quot;&gt;重要&lt;/h2&gt;
+
+  &lt;p&gt;我假设看这篇文章的人具有&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;基本的Linux Shell的使用&lt;/strong&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;拥有GitHub账户并了解Git的使用&lt;/strong&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h2 id=&quot;githubhttpgithubcomlinux-shell&quot;&gt;&lt;em&gt;你至少需要拥有一个&lt;a href=&quot;http://github.com&quot;&gt;GitHub&lt;/a&gt;账户,如果你不了解Linux Shell使用你当然也可以往下看,你所需要的命令我都没有省略&lt;/em&gt;&lt;/h2&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;首先要了解jekyll是什么:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;jekyll是一个简单的免费的Blog生成工具，类似WordPress。但是和WordPress又有很大的不同，原因是jekyll只是一个生成静态网页的工具，不需要数据库支持。但是可以配合第三方服务,例如disqus。最关键的是jekyll可以免费部署在github上，而且可以绑定自己的域名。–互动百科&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;jekyll&quot;&gt;1. 安装jekyll&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;jekyll hp&lt;/a&gt;中有你想了解的全部,当然你或许会觉得信息量太大了,你只想要先把自己的&lt;strong&gt;静态网站&lt;/strong&gt;先跑起来,那么这篇博客相信会帮到你.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;首先&lt;/strong&gt;,你需要安装jekyll所需要的环境,jekyll使用的是&lt;strong&gt;ruby&lt;/strong&gt;(性能你懂得)所以首先的是安装ruby环境:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;$sudo apt-get install ruby1.9.1-dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;当然你也需要&lt;strong&gt;javascript&lt;/strong&gt;的运行时:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;$sudo apt-get install NodeJS
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接下来就可以&lt;strong&gt;安装jekyll&lt;/strong&gt;了&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;$sudo gem install jekyll
+$jekyll new my-awsome-site
+$cd my-awsome-site
+~/my-awsome-site$ jekyll serce
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;完成上面的命令以后你就可以用你的浏览器访问http://localhost:4000来测试你的测试页面了.&lt;em&gt;see? simple&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;jekyll-1&quot;&gt;2. jekyll使用入门&lt;/h2&gt;
+
+&lt;p&gt;首先简单的说明刚才生成的&lt;strong&gt;my-awsome-site&lt;/strong&gt;的文件夹结构&lt;/p&gt;
+
+&lt;p&gt;简单来说作为简单的入门使用,你只需要了解&lt;strong&gt;_post&lt;/strong&gt;文件夹和&lt;strong&gt;_config.yml&lt;/strong&gt;文件.&lt;/p&gt;
+
+&lt;h3 id=&quot;post&quot;&gt;2.1 _post文件夹&lt;/h3&gt;
+&lt;p&gt;_post文件夹包含了你所有的post,你可以简单的使用&lt;a href=&quot;http://zh.wikipedia.org/wiki/Markdown&quot;&gt;markdown&lt;/a&gt;标记语言来编写你自己的帖子.&lt;strong&gt;不过值得注意的是,对于一个jekyll模板来说,模板可能会自定义markdown标记所以先去了解你所使用的模板&lt;/strong&gt;,当然关于模板的事情我们后面在说.&lt;/p&gt;
+
+&lt;h3 id=&quot;configyml&quot;&gt;2.2 _config.yml文件&lt;/h3&gt;
+&lt;p&gt;看名字就知道_config.yml是你站点的一个config,这个config文件也和模板密切相关,&lt;strong&gt;想修改这个文件请了解你所使用的模板&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;2.3 使用模板&lt;/h3&gt;
+&lt;p&gt;用过wordpress的人一定会知道有模板这种东西,当然对于静态网站生成器来说使用起来也很简单.&lt;/p&gt;
+
+&lt;p&gt;你可以去&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;jekyll theme&lt;/a&gt;这个网站找自己喜欢的模板,然后在&lt;strong&gt;GitHub&lt;/strong&gt;上fork过来,然后clone覆盖掉你的my-awsome-site就可以使用这个模板了.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;下一个模板,覆盖你的文件夹然后使用:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;$jekyll serve
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;来测试你的新模板&lt;/p&gt;
+
+&lt;h3 id=&quot;post-1&quot;&gt;2.4 编写你自己的post&lt;/h3&gt;
+&lt;p&gt;相信你了解一些markdown(如果你经常使用GitHub的话).如果你不了解去找一下markdown的语法,相当简单,相信你十分钟就能掌握, learn it on &lt;a href=&quot;http://zh.wikipedia.org/wiki/Markdown&quot;&gt;Wikipedia&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;但是你需要了解对于jekyll的markdown来说有一个markdown的头:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;---
+layout: post
+title: &amp;quot;Sample Link Post&amp;quot;
+description: &amp;quot;Example and code for using link posts.&amp;quot;
+tags: [sample post, link post]
+comments: true
+link: http://mademistakes.com  
+---
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;这个头包含你的post的标题,tag等信息.刚才也提到了这个头和你所使用的jekyll的模板是密切相关的,&lt;strong&gt;修改的时候先去了解你所使用的模板&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;3. 发布你自己的静态网站&lt;/h2&gt;
+&lt;p&gt;相信你现在可以在http://localhost:4000访问到你自己的jekyll网站了,那么如何发布呢?&lt;/p&gt;
+
+&lt;p&gt;GitHub提供了一个&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;的服务,你可以把你的html静态网站或者jekyll挂到你的GitHub的仓库中就可以访问到你的静态网站了.&lt;/p&gt;
+
+&lt;h3 id=&quot;github-pages&quot;&gt;3.1 建立GitHub Pages仓库&lt;/h3&gt;
+&lt;p&gt;要使用GitHub Pages服务,你需要在你的GitHub上新建一个名为:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;username&lt;/em&gt;.github.io&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;的仓库,&lt;em&gt;username&lt;/em&gt;是你的用户名,创建了这个仓库并并push了你的网站之后你就可以使用http://username.github.io这样一个网址来访问你的网站了.&lt;/p&gt;
+
+&lt;h3 id=&quot;pushjekyll&quot;&gt;3.2 push你的jekyll网站&lt;/h3&gt;
+&lt;p&gt;首先你需要把你刚才建立的&lt;em&gt;username&lt;/em&gt;.github.io这个仓库clone下来:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;$git clone http://github.com/username/username.github.io
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;clone下来以后你会看到一个username.github.io的文件夹,把你刚才的my-awsome-site文件夹中你测试好的jekyll网站拷贝到这个文件夹中,然后使用命令:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;$git add .
+$git commit -m &amp;quot;init commit&amp;quot;
+$git push
+$git push origin master
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;完成了上面的操作后你的静态网站已经成功地推送到你的username.github.io这个仓库中了,去github页面找到你的username.github.io这个仓库:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Setting -&amp;gt; GitHub Pages&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;应该可以看到你的网站已经成功部署了,&lt;strong&gt;首次提交的时候,你可能需要10分钟才能使用username.github.io这个网址访问你的网站&lt;/strong&gt;,当然之后对于你网站的修改你都几乎不需要等待.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;mins-later&quot;&gt;10 mins later…&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;相信你已经可以使用username.github.io访问到你的网站了&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;enjoy-xd&quot;&gt;Enjoy XD&lt;/h1&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;/build-by-jekyll/&quot;&gt;动手搭建自己的jekyll静态博客&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on November 09, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[软终端与tasklet]]></title>
+ <link rel="alternate" type="text/html" href="/softirq_and_tasklet/" />
   <id>/softirq_and_tasklet</id>
   <published>2014-10-28T00:00:00-04:00</published>
   <updated>2014-10-28T00:00:00-04:00</updated>
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
-  <content type="html">&lt;h1 id=&quot;tasklet&quot;&gt;软中断与tasklet&lt;/h1&gt;
-&lt;p&gt;标签：softirqs tasklet&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Folow me: &lt;i class=&quot;icon-github icon-2x&quot;&gt;&lt;/i&gt;  &lt;a href=&quot;http://github.com/zhaonanyu&quot;&gt;zhaonanyu&lt;/a&gt;
+  <content type="html">&lt;p&gt;Folow me: &lt;i class=&quot;icon-github icon-2x&quot;&gt;&lt;/i&gt;  &lt;a href=&quot;http://github.com/zhaonanyu&quot;&gt;zhaonanyu&lt;/a&gt;
 Contact me: &lt;strong&gt;zhaonanyu@gmail.com&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
-&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
-  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;include&amp;lt;stdio.h&amp;gt;
-
-&lt;span class=&quot;predefined-type&quot;&gt;int&lt;/span&gt; main()
-{
-    printf(&lt;span class=&quot;string&quot;&gt;&lt;span class=&quot;delimiter&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;content&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;delimiter&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;);
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;下半部&lt;/strong&gt;
@@ -125,7 +285,7 @@ do_irq()函数将会根据一个&lt;strong&gt;pending&lt;/strong&gt;局部变量
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;tasklet-1&quot;&gt;tasklet&lt;/h2&gt;
+&lt;h2 id=&quot;tasklet&quot;&gt;tasklet&lt;/h2&gt;
 &lt;p&gt;tasklet和软中断本质上很类似，但是接口也更简单，对于&lt;strong&gt;锁保护&lt;/strong&gt;的要求更低。
 tasklet是通过软中断来实现的，tasklet实际上也是一种软中断。回过头来看一下前面提到的软中断目前的10中类型：&lt;/p&gt;
 
@@ -199,7 +359,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 另外陈老师在翻译《Linux内核设计与实现》时有个大错误XD：&lt;em&gt;p113 表8-2应该是&lt;strong&gt;软中断类型表&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;/softirq_and_tasklet/&quot;&gt;softirq and tasklet&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on October 28, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/softirq_and_tasklet/&quot;&gt;软终端与tasklet&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on October 28, 2014.&lt;/p&gt;</content>
 </entry>
 
 
@@ -210,9 +370,9 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   <published>2013-10-26T00:00:00-04:00</published>
   <updated>2013-10-26T00:00:00-04:00</updated>
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Here be a sample post with a custom background image. To utilize this “feature” just add the following YAML to a post’s front matter.&lt;/p&gt;
 
@@ -225,7 +385,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 
 &lt;div xmlns:cc=&quot;http://creativecommons.org/ns#&quot; xmlns:dct=&quot;http://purl.org/dc/terms/&quot; about=&quot;http://subtlepatterns.com&quot; class=&quot;notice&quot;&gt;Background images from &lt;span property=&quot;dct:title&quot;&gt;Subtle Patterns&lt;/span&gt; (&lt;a rel=&quot;cc:attributionURL&quot; property=&quot;cc:attributionName&quot; href=&quot;http://subtlepatterns.com&quot;&gt;Subtle Patterns&lt;/a&gt;) / &lt;a rel=&quot;license&quot; href=&quot;http://creativecommons.org/licenses/by-sa/3.0/&quot;&gt;CC BY-SA 3.0&lt;/a&gt;&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/background-image/&quot;&gt;Post with a Background Image&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on October 26, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/background-image/&quot;&gt;Post with a Background Image&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on October 26, 2013.&lt;/p&gt;</content>
 </entry>
 
 
@@ -237,9 +397,9 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   <published>2013-08-16T00:00:00-04:00</published>
   
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Syntax_highlighting&quot;&gt;Syntax highlighting&lt;/a&gt; is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.&lt;/p&gt;
 
@@ -352,7 +512,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 &lt;script src=&quot;https://gist.github.com/8531391.js&quot;&gt; &lt;/script&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;/code-highlighting-post/&quot;&gt;Syntax Highlighting Post&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on August 16, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/code-highlighting-post/&quot;&gt;Syntax Highlighting Post&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on August 16, 2013.&lt;/p&gt;</content>
 </entry>
 
 
@@ -363,13 +523,13 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   <published>2013-08-12T00:00:00-04:00</published>
   <updated>2013-08-12T00:00:00-04:00</updated>
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;This theme supports &lt;strong&gt;link posts&lt;/strong&gt;, made famous by John Gruber. To use, just add &lt;code&gt;link: http://url-you-want-linked&lt;/code&gt; to the post’s YAML front matter and you’re done.&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/sample-link-post/&quot;&gt;Sample Link Post&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on August 12, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/sample-link-post/&quot;&gt;Sample Link Post&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on August 12, 2013.&lt;/p&gt;</content>
 </entry>
 
 
@@ -380,9 +540,9 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   <published>2013-06-25T00:00:00-04:00</published>
   <updated>2013-06-25T00:00:00-04:00</updated>
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
   <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/SU3kYxJmWuQ&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
 
@@ -392,7 +552,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;560&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;315&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;//www.youtube.com/embed/SU3kYxJmWuQ&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;frameborder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;0&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/video-post/&quot;&gt;A Post with a Video&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on June 25, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/video-post/&quot;&gt;A Post with a Video&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on June 25, 2013.&lt;/p&gt;</content>
 </entry>
 
 
@@ -404,9 +564,9 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   <published>2013-05-23T00:00:00-04:00</published>
   
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;This is a sample post with a large feature image up top and tons of text. Odio ad blue bottle vinyl, 90’s narwhal commodo bitters pour-over nostrud. Ugh est hashtag in, fingerstache adipisicing laboris esse Pinterest shabby chic Portland. Shoreditch bicycle rights anim, flexitarian laboris put a bird on it vinyl cupidatat narwhal. Hashtag artisan skateboard, flannel Bushwick nesciunt salvia aute fixie do plaid post-ironic dolor McSweeney’s. Cliche pour-over chambray nulla four loko skateboard sapiente hashtag.&lt;/p&gt;
 
@@ -449,7 +609,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 
 &lt;p&gt;Aliquip enim artisan dolor post-ironic. Pug tote bag Marfa, deserunt pour-over Portland wolf eu odio intelligentsia american apparel ugh ea. Sunt viral et, 3 wolf moon gastropub pug id. Id fashion axe est typewriter, mlkshk Portland art party aute brunch. Sint pork belly Cosby sweater, deep v mumblecore kitsch american apparel. Try-hard direct trade tumblr sint skateboard. Adipisicing bitters excepteur biodiesel, pickled gastropub aute veniam.&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/readability-feature-post/&quot;&gt;Post with Large Feature Image and Text&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on May 23, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/readability-feature-post/&quot;&gt;Post with Large Feature Image and Text&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on May 23, 2013.&lt;/p&gt;</content>
 </entry>
 
 
@@ -460,9 +620,9 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   <published>2013-05-22T00:00:00-04:00</published>
   <updated>2013-05-22T00:00:00-04:00</updated>
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Here are some examples of what a post with images might look like. If you want to display two or three images next to each other responsively use &lt;code&gt;figure&lt;/code&gt; with the appropriate &lt;code&gt;class&lt;/code&gt;. Each instance of &lt;code&gt;figure&lt;/code&gt; is auto-numbered and displayed in the caption.&lt;/p&gt;
 
@@ -518,7 +678,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 	&lt;figcaption&gt;Three images.&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/sample-post-images/&quot;&gt;A Post with Images&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on May 22, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/sample-post-images/&quot;&gt;A Post with Images&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on May 22, 2013.&lt;/p&gt;</content>
 </entry>
 
 
@@ -529,9 +689,9 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   <published>2012-05-22T00:00:00-04:00</published>
   <updated>2012-05-22T00:00:00-04:00</updated>
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Portland in shoreditch Vice, labore typewriter pariatur hoodie fap sartorial Austin. Pinterest literally occupy Schlitz forage. Odio ad blue bottle vinyl, 90’s narwhal commodo bitters pour-over nostrud. Ugh est hashtag in, fingerstache adipisicing laboris esse Pinterest shabby chic Portland. Shoreditch bicycle rights anim, flexitarian laboris put a bird on it vinyl cupidatat narwhal. Hashtag artisan skateboard, flannel Bushwick nesciunt salvia aute fixie do plaid post-ironic dolor McSweeney’s. Cliche pour-over chambray nulla four loko skateboard sapiente hashtag.&lt;/p&gt;
 
@@ -574,7 +734,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 
 &lt;p&gt;Aliquip enim artisan dolor post-ironic. Pug tote bag Marfa, deserunt pour-over Portland wolf eu odio intelligentsia american apparel ugh ea. Sunt viral et, 3 wolf moon gastropub pug id. Id fashion axe est typewriter, mlkshk Portland art party aute brunch. Sint pork belly Cosby sweater, deep v mumblecore kitsch american apparel. Try-hard direct trade tumblr sint skateboard. Adipisicing bitters excepteur biodiesel, pickled gastropub aute veniam.&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/readability-post/&quot;&gt;Testing Readability with a Bunch of Text&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on May 22, 2012.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/readability-post/&quot;&gt;Testing Readability with a Bunch of Text&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on May 22, 2012.&lt;/p&gt;</content>
 </entry>
 
 
@@ -586,9 +746,9 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   <published>2011-03-10T00:00:00-05:00</published>
   
   <author>
-    <name>Your Name</name>
+    <name>zhaonanyu</name>
     <uri></uri>
-    <email>you@email.com</email>
+    <email>zhaonanyu@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Below is just about everything you’ll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.&lt;/p&gt;
 
@@ -715,7 +875,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 &lt;div&gt;&lt;a href=&quot;#&quot; class=&quot;btn btn-danger&quot;&gt;Danger Button&lt;/a&gt;&lt;/div&gt;
 &lt;div&gt;&lt;a href=&quot;#&quot; class=&quot;btn btn-info&quot;&gt;Info Button&lt;/a&gt;&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/sample-post/&quot;&gt;Sample Post&lt;/a&gt; was originally published by Your Name at &lt;a href=&quot;&quot;&gt;Site Title&lt;/a&gt; on March 10, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/sample-post/&quot;&gt;Sample Post&lt;/a&gt; was originally published by zhaonanyu at &lt;a href=&quot;&quot;&gt;&lt;/a&gt; on March 10, 2011.&lt;/p&gt;</content>
 </entry>
 
 </feed>

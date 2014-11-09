@@ -5,11 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Latest Posts &#8211; Site Title</title>
+<title>Latest Posts &#8211; </title>
 <meta name="description" content="Describe this nonsense.">
 <meta name="keywords" content="Jekyll, theme, themes, responsive, blog, modern">
 
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="/images/abstract-1.jpg">
 
+<meta name="twitter:title" content="Latest Posts">
+<meta name="twitter:description" content="Describe this nonsense.">
+<meta name="twitter:creator" content="@zhaonanyu">
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
@@ -17,15 +23,15 @@
 <meta property="og:title" content="Latest Posts">
 <meta property="og:description" content="Describe this nonsense.">
 <meta property="og:url" content="/index.html">
-<meta property="og:site_name" content="Site Title">
+<meta property="og:site_name" content="">
 
 
 
 
 
 <link rel="canonical" href="/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Site Title Feed">
-<link rel="author" href="https://google.com/+yourid?rel=author">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<link rel="author" href="https://google.com/+zhaonanyu?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -71,21 +77,27 @@
 			<a href="#">About</a>
 			<ul class="dl-submenu">
 				<li>
-					<img src="/images/avatar.jpg" alt="Your Name photo" class="author-photo">
-					<h4>Your Name</h4>
-					<p>Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice.</p>
+					<img src="/images/avatar.jpg" alt="zhaonanyu photo" class="author-photo">
+					<h4>zhaonanyu</h4>
+					<p>When u reading this that mean my bolg looks pretty good, thx bro XD</p>
 				</li>
 				<li><a href="/about/">Learn More</a></li>
 				<li>
-					<a href="mailto:you@email.com"><i class="fa fa-envelope"></i> Email</a>
+					<a href="mailto:zhaonanyu@gmail.com"><i class="fa fa-envelope"></i> Email</a>
 				</li>
-				
+				<li>
+					<a href="http://twitter.com/zhaonanyu"><i class="fa fa-twitter"></i> Twitter</a>
+				</li>
+				<li>
+					<a href="http://facebook.com/赵南雨"><i class="fa fa-facebook"></i> Facebook</a>
+				</li>
+				<li>
+					<a href="https://google.com/+zhaonanyu"><i class="fa fa-google-plus"></i> Google+</a>
+				</li>
 				
 				<li>
-					<a href="https://google.com/+yourid"><i class="fa fa-google-plus"></i> Google+</a>
+					<a href="http://github.com/zhaonanyu"><i class="fa fa-github"></i> GitHub</a>
 				</li>
-				
-				
 				
 				
 				
@@ -123,7 +135,7 @@
   
   <div class="header-title">
     <div class="header-title-wrap">
-      <h1>Site Title</h1>
+      <h1></h1>
       <h2>Latest Posts</h2>
     </div><!-- /.header-title-wrap -->
   </div><!-- /.header-title -->
@@ -134,7 +146,7 @@
 <article class="hentry">
   <header>
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2014-10-28T00:00:00-04:00"><a href="/softirq_and_tasklet/">October 28, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="/softirq_and_tasklet/#disqus_thread">Comment</a></span>
+      <span class="entry-date date published updated"><time datetime="2014-11-09T00:00:00-05:00"><a href="/build-by-jekyll/">November 09, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="/build-by-jekyll/#disqus_thread">Comment</a></span>
       
       <span class="entry-reading-time pull-right">
         <i class="fa fa-clock-o"></i>
@@ -144,29 +156,194 @@
       
     </div><!-- /.entry-meta -->
     
-      <h1 class="entry-title"><a href="/softirq_and_tasklet/" rel="bookmark" title="softirq and tasklet"><i class="fa fa-angle-double-right"></i></a> <a href="http://mademistakes.com">softirq and tasklet</a></h1>
+      <h1 class="entry-title"><a href="/build-by-jekyll/" rel="bookmark" title="动手搭建自己的jekyll静态博客" itemprop="url">动手搭建自己的jekyll静态博客</a></h1>
     
   </header>
   <div class="entry-content">
-    <h1 id="tasklet">软中断与tasklet</h1>
-<p>标签：softirqs tasklet</p>
+    <blockquote>
+  <p><em>动态网站太重了.轻量级的静态网站生成工具一时蔚然成风,至少在开(si)发(ji)者(lao)圈子里如此.–<a href="http://ipn.li/kernelpanic/">kernel panic</a></em></p>
+</blockquote>
 
 <hr />
 
-<p>Folow me: <i class="icon-github icon-2x"></i>  <a href="http://github.com/zhaonanyu">zhaonanyu</a>
-Contact me: <strong>zhaonanyu@gmail.com</strong></p>
+<blockquote>
+  <h2 id="section">重要</h2>
+
+  <p>我假设看这篇文章的人具有</p>
+
+  <ul>
+    <li>
+      <p><strong>基本的Linux Shell的使用</strong></p>
+    </li>
+    <li>
+      <p><strong>拥有GitHub账户并了解Git的使用</strong></p>
+    </li>
+  </ul>
+
+  <h2 id="githubhttpgithubcomlinux-shell"><em>你至少需要拥有一个<a href="http://github.com">GitHub</a>账户,如果你不了解Linux Shell使用你当然也可以往下看,你所需要的命令我都没有省略</em></h2>
+</blockquote>
+
+<p><strong>首先要了解jekyll是什么:</strong></p>
+
+<blockquote>
+  <p><em>jekyll是一个简单的免费的Blog生成工具，类似WordPress。但是和WordPress又有很大的不同，原因是jekyll只是一个生成静态网页的工具，不需要数据库支持。但是可以配合第三方服务,例如disqus。最关键的是jekyll可以免费部署在github上，而且可以绑定自己的域名。–互动百科</em></p>
+</blockquote>
 
 <hr />
+
+<h2 id="jekyll">1. 安装jekyll</h2>
+<p><a href="http://jekyllrb.com/">jekyll hp</a>中有你想了解的全部,当然你或许会觉得信息量太大了,你只想要先把自己的<strong>静态网站</strong>先跑起来,那么这篇博客相信会帮到你.</p>
+
+<p><strong>首先</strong>,你需要安装jekyll所需要的环境,jekyll使用的是<strong>ruby</strong>(性能你懂得)所以首先的是安装ruby环境:</p>
+
 <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>include&lt;stdio.h&gt;
-
-<span class="predefined-type">int</span> main()
-{
-    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">hello</span><span class="delimiter">&quot;</span></span>);
-}
+  <div class="code"><pre>$sudo apt-get install ruby1.9.1-dev
 </pre></div>
 </div>
 </div>
+
+<p>当然你也需要<strong>javascript</strong>的运行时:</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$sudo apt-get install NodeJS
+</pre></div>
+</div>
+</div>
+
+<p>接下来就可以<strong>安装jekyll</strong>了</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$sudo gem install jekyll
+$jekyll new my-awsome-site
+$cd my-awsome-site
+~/my-awsome-site$ jekyll serce
+</pre></div>
+</div>
+</div>
+
+<p>完成上面的命令以后你就可以用你的浏览器访问http://localhost:4000来测试你的测试页面了.<em>see? simple</em></p>
+
+<hr />
+
+<h2 id="jekyll-1">2. jekyll使用入门</h2>
+
+<p>首先简单的说明刚才生成的<strong>my-awsome-site</strong>的文件夹结构</p>
+
+<p>简单来说作为简单的入门使用,你只需要了解<strong>_post</strong>文件夹和<strong>_config.yml</strong>文件.</p>
+
+<h3 id="post">2.1 _post文件夹</h3>
+<p>_post文件夹包含了你所有的post,你可以简单的使用<a href="http://zh.wikipedia.org/wiki/Markdown">markdown</a>标记语言来编写你自己的帖子.<strong>不过值得注意的是,对于一个jekyll模板来说,模板可能会自定义markdown标记所以先去了解你所使用的模板</strong>,当然关于模板的事情我们后面在说.</p>
+
+<h3 id="configyml">2.2 _config.yml文件</h3>
+<p>看名字就知道_config.yml是你站点的一个config,这个config文件也和模板密切相关,<strong>想修改这个文件请了解你所使用的模板</strong>.</p>
+
+<h3 id="section-1">2.3 使用模板</h3>
+<p>用过wordpress的人一定会知道有模板这种东西,当然对于静态网站生成器来说使用起来也很简单.</p>
+
+<p>你可以去<a href="http://jekyllthemes.org/">jekyll theme</a>这个网站找自己喜欢的模板,然后在<strong>GitHub</strong>上fork过来,然后clone覆盖掉你的my-awsome-site就可以使用这个模板了.</p>
+
+<p><strong>下一个模板,覆盖你的文件夹然后使用:</strong></p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$jekyll serve
+</pre></div>
+</div>
+</div>
+
+<p>来测试你的新模板</p>
+
+<h3 id="post-1">2.4 编写你自己的post</h3>
+<p>相信你了解一些markdown(如果你经常使用GitHub的话).如果你不了解去找一下markdown的语法,相当简单,相信你十分钟就能掌握, learn it on <a href="http://zh.wikipedia.org/wiki/Markdown">Wikipedia</a>.</p>
+
+<p>但是你需要了解对于jekyll的markdown来说有一个markdown的头:</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>---
+layout: post
+title: &quot;Sample Link Post&quot;
+description: &quot;Example and code for using link posts.&quot;
+tags: [sample post, link post]
+comments: true
+link: http://mademistakes.com  
+---
+</pre></div>
+</div>
+</div>
+
+<p>这个头包含你的post的标题,tag等信息.刚才也提到了这个头和你所使用的jekyll的模板是密切相关的,<strong>修改的时候先去了解你所使用的模板</strong>.</p>
+
+<hr />
+
+<h2 id="section-2">3. 发布你自己的静态网站</h2>
+<p>相信你现在可以在http://localhost:4000访问到你自己的jekyll网站了,那么如何发布呢?</p>
+
+<p>GitHub提供了一个<a href="https://pages.github.com/">GitHub Pages</a>的服务,你可以把你的html静态网站或者jekyll挂到你的GitHub的仓库中就可以访问到你的静态网站了.</p>
+
+<h3 id="github-pages">3.1 建立GitHub Pages仓库</h3>
+<p>要使用GitHub Pages服务,你需要在你的GitHub上新建一个名为:</p>
+
+<p><strong><em>username</em>.github.io</strong></p>
+
+<p>的仓库,<em>username</em>是你的用户名,创建了这个仓库并并push了你的网站之后你就可以使用http://username.github.io这样一个网址来访问你的网站了.</p>
+
+<h3 id="pushjekyll">3.2 push你的jekyll网站</h3>
+<p>首先你需要把你刚才建立的<em>username</em>.github.io这个仓库clone下来:</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$git clone http://github.com/username/username.github.io
+</pre></div>
+</div>
+</div>
+
+<p>clone下来以后你会看到一个username.github.io的文件夹,把你刚才的my-awsome-site文件夹中你测试好的jekyll网站拷贝到这个文件夹中,然后使用命令:</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$git add .
+$git commit -m &quot;init commit&quot;
+$git push
+$git push origin master
+</pre></div>
+</div>
+</div>
+
+<p>完成了上面的操作后你的静态网站已经成功地推送到你的username.github.io这个仓库中了,去github页面找到你的username.github.io这个仓库:</p>
+
+<p><strong>Setting -&gt; GitHub Pages</strong></p>
+
+<p>应该可以看到你的网站已经成功部署了,<strong>首次提交的时候,你可能需要10分钟才能使用username.github.io这个网址访问你的网站</strong>,当然之后对于你网站的修改你都几乎不需要等待.</p>
+
+<hr />
+
+<h3 id="mins-later">10 mins later…</h3>
+<p><strong><em>相信你已经可以使用username.github.io访问到你的网站了</em></strong></p>
+
+<h1 id="enjoy-xd">Enjoy XD</h1>
+
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    <div class="entry-meta">
+      <span class="entry-date date published updated"><time datetime="2014-10-28T00:00:00-04:00"><a href="/softirq_and_tasklet/">October 28, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="/softirq_and_tasklet/#disqus_thread">Comment</a></span>
+      
+      <span class="entry-reading-time pull-right">
+        <i class="fa fa-clock-o"></i>
+        
+        Reading time ~1 minute
+      </span><!-- /.entry-reading-time -->
+      
+    </div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="/softirq_and_tasklet/" rel="bookmark" title="软终端与tasklet" itemprop="url">软终端与tasklet</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <p>Folow me: <i class="icon-github icon-2x"></i>  <a href="http://github.com/zhaonanyu">zhaonanyu</a>
+Contact me: <strong>zhaonanyu@gmail.com</strong></p>
+
+<hr />
 
 <blockquote>
   <p><strong>下半部</strong>
@@ -249,7 +426,7 @@ do_irq()函数将会根据一个<strong>pending</strong>局部变量来判断该
 
 <hr />
 
-<h2 id="tasklet-1">tasklet</h2>
+<h2 id="tasklet">tasklet</h2>
 <p>tasklet和软中断本质上很类似，但是接口也更简单，对于<strong>锁保护</strong>的要求更低。
 tasklet是通过软中断来实现的，tasklet实际上也是一种软中断。回过头来看一下前面提到的软中断目前的10中类型：</p>
 
@@ -329,7 +506,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 <article class="hentry">
   <header>
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2013-10-26T00:00:00-04:00"><a href="/background-image/">October 26, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2013-10-26T00:00:00-04:00"><a href="/background-image/">October 26, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>
       
       <span class="entry-reading-time pull-right">
         <i class="fa fa-clock-o"></i>
@@ -360,7 +537,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 <article class="hentry">
   <header>
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2013-08-16T00:00:00-04:00"><a href="/code-highlighting-post/">August 16, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2013-08-16T00:00:00-04:00"><a href="/code-highlighting-post/">August 16, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>
       
       <span class="entry-reading-time pull-right">
         <i class="fa fa-clock-o"></i>
@@ -491,7 +668,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 <article class="hentry">
   <header>
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2013-08-12T00:00:00-04:00"><a href="/sample-link-post/">August 12, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="/sample-link-post/#disqus_thread">Comment</a></span>
+      <span class="entry-date date published updated"><time datetime="2013-08-12T00:00:00-04:00"><a href="/sample-link-post/">August 12, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="/sample-link-post/#disqus_thread">Comment</a></span>
       
       <span class="entry-reading-time pull-right">
         <i class="fa fa-clock-o"></i>
@@ -506,34 +683,6 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
   </header>
   <div class="entry-content">
     <p>This theme supports <strong>link posts</strong>, made famous by John Gruber. To use, just add <code>link: http://url-you-want-linked</code> to the post’s YAML front matter and you’re done.</p>
-
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  <header>
-    <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2013-06-25T00:00:00-04:00"><a href="/video-post/">June 25, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>
-      
-      <span class="entry-reading-time pull-right">
-        <i class="fa fa-clock-o"></i>
-        
-        Reading time ~1 minute
-      </span><!-- /.entry-reading-time -->
-      
-    </div><!-- /.entry-meta -->
-    
-      <h1 class="entry-title"><a href="/video-post/" rel="bookmark" title="A Post with a Video" itemprop="url">A Post with a Video</a></h1>
-    
-  </header>
-  <div class="entry-content">
-    <iframe width="560" height="315" src="//www.youtube.com/embed/SU3kYxJmWuQ" frameborder="0"> </iframe>
-
-<p>Video embeds are responsive and scale with the width of the main content block with the help of <a href="http://fitvidsjs.com/">FitVids</a>.</p>
-
-<p>Not sure if this only effects Kramdown or if it’s an issue with Markdown in general. But adding YouTube video embeds causes errors when building your Jekyll site. To fix add a space between the <code>&lt;iframe&gt;</code> tags and remove <code>allowfullscreen</code>. Example below:</p>
-
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;iframe</span> <span class="na">width=</span><span class="s">&quot;560&quot;</span> <span class="na">height=</span><span class="s">&quot;315&quot;</span> <span class="na">src=</span><span class="s">&quot;//www.youtube.com/embed/SU3kYxJmWuQ&quot;</span> <span class="na">frameborder=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;/iframe&gt;</span></code></pre></div>
 
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
@@ -565,7 +714,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 
 <div class="footer-wrapper">
   <footer role="contentinfo">
-    <span>&copy; 2014 Your Name. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
+    <span>&copy; 2014 zhaonanyu. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
   </footer>
 </div><!-- /.footer-wrapper -->
 

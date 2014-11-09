@@ -5,27 +5,32 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>softirq and tasklet &#8211; Site Title</title>
-<meta name="description" content="Example and code for using link posts.">
-<meta name="keywords" content="sample post, link post">
+<title>软终端与tasklet &#8211; </title>
+<meta name="description" content="tasklet是基于软中断实现的">
+<meta name="keywords" content="tasklet, softirq, linux kernel">
 
-
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+<meta name="twitter:title" content="软终端与tasklet">
+<meta name="twitter:description" content="tasklet是基于软中断实现的">
+<meta name="twitter:creator" content="@zhaonanyu">
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="softirq and tasklet">
-<meta property="og:description" content="Example and code for using link posts.">
+<meta property="og:title" content="软终端与tasklet">
+<meta property="og:description" content="tasklet是基于软中断实现的">
 <meta property="og:url" content="/softirq_and_tasklet/">
-<meta property="og:site_name" content="Site Title">
+<meta property="og:site_name" content="">
 
 
 
 
 
 <link rel="canonical" href="/softirq_and_tasklet/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Site Title Feed">
-<link rel="author" href="https://google.com/+yourid?rel=author">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<link rel="author" href="https://google.com/+zhaonanyu?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -71,21 +76,27 @@
 			<a href="#">About</a>
 			<ul class="dl-submenu">
 				<li>
-					<img src="/images/avatar.jpg" alt="Your Name photo" class="author-photo">
-					<h4>Your Name</h4>
-					<p>Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice.</p>
+					<img src="/images/avatar.jpg" alt="zhaonanyu photo" class="author-photo">
+					<h4>zhaonanyu</h4>
+					<p>When u reading this that mean my bolg looks pretty good, thx bro XD</p>
 				</li>
 				<li><a href="/about/">Learn More</a></li>
 				<li>
-					<a href="mailto:you@email.com"><i class="fa fa-envelope"></i> Email</a>
+					<a href="mailto:zhaonanyu@gmail.com"><i class="fa fa-envelope"></i> Email</a>
 				</li>
-				
+				<li>
+					<a href="http://twitter.com/zhaonanyu"><i class="fa fa-twitter"></i> Twitter</a>
+				</li>
+				<li>
+					<a href="http://facebook.com/赵南雨"><i class="fa fa-facebook"></i> Facebook</a>
+				</li>
+				<li>
+					<a href="https://google.com/+zhaonanyu"><i class="fa fa-google-plus"></i> Google+</a>
+				</li>
 				
 				<li>
-					<a href="https://google.com/+yourid"><i class="fa fa-google-plus"></i> Google+</a>
+					<a href="http://github.com/zhaonanyu"><i class="fa fa-github"></i> GitHub</a>
 				</li>
-				
-				
 				
 				
 				
@@ -121,7 +132,7 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="http://mademistakes.com">softirq and tasklet</a></h1>
+          <h1 class="entry-title"><a href="/softirq_and_tasklet/" rel="bookmark" title="软终端与tasklet">软终端与tasklet</a></h1>
         
         <h2>October 28, 2014</h2>
         
@@ -134,25 +145,10 @@
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <h1 id="tasklet">软中断与tasklet</h1>
-<p>标签：softirqs tasklet</p>
-
-<hr />
-
-<p>Folow me: <i class="icon-github icon-2x"></i>  <a href="http://github.com/zhaonanyu">zhaonanyu</a>
+      <p>Folow me: <i class="icon-github icon-2x"></i>  <a href="http://github.com/zhaonanyu">zhaonanyu</a>
 Contact me: <strong>zhaonanyu@gmail.com</strong></p>
 
 <hr />
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>include&lt;stdio.h&gt;
-
-<span class="predefined-type">int</span> main()
-{
-    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">hello</span><span class="delimiter">&quot;</span></span>);
-}
-</pre></div>
-</div>
-</div>
 
 <blockquote>
   <p><strong>下半部</strong>
@@ -235,7 +231,7 @@ do_irq()函数将会根据一个<strong>pending</strong>局部变量来判断该
 
 <hr />
 
-<h2 id="tasklet-1">tasklet</h2>
+<h2 id="tasklet">tasklet</h2>
 <p>tasklet和软中断本质上很类似，但是接口也更简单，对于<strong>锁保护</strong>的要求更低。
 tasklet是通过软中断来实现的，tasklet实际上也是一种软中断。回过头来看一下前面提到的软中断目前的10中类型：</p>
 
@@ -310,10 +306,10 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 
 
       <footer class="entry-meta">
-        <span class="entry-tags"><a href="/tags/#sample post" title="Pages tagged sample post" class="tag">sample post</a><a href="/tags/#link post" title="Pages tagged link post" class="tag">link post</a></span>
-        <span><a href="/softirq_and_tasklet/" rel="bookmark" title="softirq and tasklet">softirq and tasklet</a> was published on <span class="entry-date date published updated"><time datetime="2014-10-28T00:00:00-04:00">October 28, 2014</time></span></span>
+        <span class="entry-tags"><a href="/tags/#tasklet" title="Pages tagged tasklet" class="tag">tasklet</a><a href="/tags/#softirq" title="Pages tagged softirq" class="tag">softirq</a><a href="/tags/#linux kernel" title="Pages tagged linux kernel" class="tag">linux kernel</a></span>
+        <span><a href="/softirq_and_tasklet/" rel="bookmark" title="软终端与tasklet">软终端与tasklet</a> was published on <span class="entry-date date published updated"><time datetime="2014-10-28T00:00:00-04:00">October 28, 2014</time></span></span>
         
-        <span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>
+        <span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>
         <div class="social-share">
   <ul class="socialcount socialcount-small inline-list">
     <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=/softirq_and_tasklet/" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
@@ -330,20 +326,20 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
       <a href="/background-image/" class="read-more-btn">Read More</a>
     </div><!-- /.read-more-header -->
     <div class="read-more-content">
-      <h3><a href="/background-image/" title="Post with a Background Image">Post with a Background Image</a></h3>
-      <p>Sample post with a background image CSS override. <a href="/background-image/">Continue reading</a></p>
+      <h3><a href="/build-by-jekyll/" title="动手搭建自己的jekyll静态博客">动手搭建自己的jekyll静态博客</a></h3>
+      <p>every geek wants a blog all by himself lol <a href="/build-by-jekyll/">Continue reading</a></p>
     </div><!-- /.read-more-content -->
   
   <div class="read-more-list">
     
       <div class="list-item">
-        <h4><a href="/code-highlighting-post/" title="Syntax Highlighting Post">Syntax Highlighting Post</a></h4>
-        <span>Published on August 16, 2013</span>
+        <h4><a href="/background-image/" title="Post with a Background Image">Post with a Background Image</a></h4>
+        <span>Published on October 26, 2013</span>
       </div><!-- /.list-item -->
     
       <div class="list-item">
-        <h4><a href="/sample-link-post/" title="Sample Link Post">Sample Link Post</a></h4>
-        <span>Published on August 12, 2013</span>
+        <h4><a href="/code-highlighting-post/" title="Syntax Highlighting Post">Syntax Highlighting Post</a></h4>
+        <span>Published on August 16, 2013</span>
       </div><!-- /.list-item -->
     
   </div><!-- /.read-more-list -->
@@ -353,7 +349,7 @@ tasklet的具体实现目前还没有搞太懂，就不描述了。
 
 <div class="footer-wrapper">
   <footer role="contentinfo">
-    <span>&copy; 2014 Your Name. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
+    <span>&copy; 2014 zhaonanyu. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
   </footer>
 </div><!-- /.footer-wrapper -->
 

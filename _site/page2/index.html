@@ -5,11 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Latest Posts &#8211; Site Title</title>
+<title>Latest Posts &#8211; </title>
 <meta name="description" content="Describe this nonsense.">
 <meta name="keywords" content="Jekyll, theme, themes, responsive, blog, modern">
 
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="/images/abstract-1.jpg">
 
+<meta name="twitter:title" content="Latest Posts">
+<meta name="twitter:description" content="Describe this nonsense.">
+<meta name="twitter:creator" content="@zhaonanyu">
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
@@ -17,15 +23,15 @@
 <meta property="og:title" content="Latest Posts">
 <meta property="og:description" content="Describe this nonsense.">
 <meta property="og:url" content="/page2/index.html">
-<meta property="og:site_name" content="Site Title">
+<meta property="og:site_name" content="">
 
 
 
 
 
 <link rel="canonical" href="/page2/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Site Title Feed">
-<link rel="author" href="https://google.com/+yourid?rel=author">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<link rel="author" href="https://google.com/+zhaonanyu?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -71,21 +77,27 @@
 			<a href="#">About</a>
 			<ul class="dl-submenu">
 				<li>
-					<img src="/images/avatar.jpg" alt="Your Name photo" class="author-photo">
-					<h4>Your Name</h4>
-					<p>Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice.</p>
+					<img src="/images/avatar.jpg" alt="zhaonanyu photo" class="author-photo">
+					<h4>zhaonanyu</h4>
+					<p>When u reading this that mean my bolg looks pretty good, thx bro XD</p>
 				</li>
 				<li><a href="/about/">Learn More</a></li>
 				<li>
-					<a href="mailto:you@email.com"><i class="fa fa-envelope"></i> Email</a>
+					<a href="mailto:zhaonanyu@gmail.com"><i class="fa fa-envelope"></i> Email</a>
 				</li>
-				
+				<li>
+					<a href="http://twitter.com/zhaonanyu"><i class="fa fa-twitter"></i> Twitter</a>
+				</li>
+				<li>
+					<a href="http://facebook.com/赵南雨"><i class="fa fa-facebook"></i> Facebook</a>
+				</li>
+				<li>
+					<a href="https://google.com/+zhaonanyu"><i class="fa fa-google-plus"></i> Google+</a>
+				</li>
 				
 				<li>
-					<a href="https://google.com/+yourid"><i class="fa fa-google-plus"></i> Google+</a>
+					<a href="http://github.com/zhaonanyu"><i class="fa fa-github"></i> GitHub</a>
 				</li>
-				
-				
 				
 				
 				
@@ -123,7 +135,7 @@
   
   <div class="header-title">
     <div class="header-title-wrap">
-      <h1>Site Title</h1>
+      <h1></h1>
       <h2>Latest Posts</h2>
     </div><!-- /.header-title-wrap -->
   </div><!-- /.header-title -->
@@ -134,7 +146,35 @@
 <article class="hentry">
   <header>
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2013-05-23T00:00:00-04:00"><a href="/readability-feature-post/">May 23, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2013-06-25T00:00:00-04:00"><a href="/video-post/">June 25, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>
+      
+      <span class="entry-reading-time pull-right">
+        <i class="fa fa-clock-o"></i>
+        
+        Reading time ~1 minute
+      </span><!-- /.entry-reading-time -->
+      
+    </div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="/video-post/" rel="bookmark" title="A Post with a Video" itemprop="url">A Post with a Video</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <iframe width="560" height="315" src="//www.youtube.com/embed/SU3kYxJmWuQ" frameborder="0"> </iframe>
+
+<p>Video embeds are responsive and scale with the width of the main content block with the help of <a href="http://fitvidsjs.com/">FitVids</a>.</p>
+
+<p>Not sure if this only effects Kramdown or if it’s an issue with Markdown in general. But adding YouTube video embeds causes errors when building your Jekyll site. To fix add a space between the <code>&lt;iframe&gt;</code> tags and remove <code>allowfullscreen</code>. Example below:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;iframe</span> <span class="na">width=</span><span class="s">&quot;560&quot;</span> <span class="na">height=</span><span class="s">&quot;315&quot;</span> <span class="na">src=</span><span class="s">&quot;//www.youtube.com/embed/SU3kYxJmWuQ&quot;</span> <span class="na">frameborder=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;/iframe&gt;</span></code></pre></div>
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    <div class="entry-meta">
+      <span class="entry-date date published updated"><time datetime="2013-05-23T00:00:00-04:00"><a href="/readability-feature-post/">May 23, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>
       
       <span class="entry-reading-time pull-right">
         <i class="fa fa-clock-o"></i>
@@ -195,7 +235,7 @@
 <article class="hentry">
   <header>
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2013-05-22T00:00:00-04:00"><a href="/sample-post-images/">May 22, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2013-05-22T00:00:00-04:00"><a href="/sample-post-images/">May 22, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>
       
       <span class="entry-reading-time pull-right">
         <i class="fa fa-clock-o"></i>
@@ -269,7 +309,7 @@
 <article class="hentry">
   <header>
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2012-05-22T00:00:00-04:00"><a href="/readability-post/">May 22, 2012</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2012-05-22T00:00:00-04:00"><a href="/readability-post/">May 22, 2012</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>
       
       <span class="entry-reading-time pull-right">
         <i class="fa fa-clock-o"></i>
@@ -330,7 +370,7 @@
 <article class="hentry">
   <header>
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2011-03-10T00:00:00-05:00"><a href="/sample-post/">March 10, 2011</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About Your Name">Your Name</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2011-03-10T00:00:00-05:00"><a href="/sample-post/">March 10, 2011</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About zhaonanyu">zhaonanyu</a></span></span>
       
       <span class="entry-reading-time pull-right">
         <i class="fa fa-clock-o"></i>
@@ -501,7 +541,7 @@
 
 <div class="footer-wrapper">
   <footer role="contentinfo">
-    <span>&copy; 2014 Your Name. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
+    <span>&copy; 2014 zhaonanyu. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
   </footer>
 </div><!-- /.footer-wrapper -->
 
