@@ -5,7 +5,7 @@ description: "every geek wants a blog all by himself lol"
 tags: [GitHub Pages, jekyll, static site generator]
 comments: true
 ---
-# 如何编写一个Linux VFS 文件系统模块-StaticFS
+
 
 标签：VFS FS StaticFS
 
