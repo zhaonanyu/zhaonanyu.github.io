@@ -1,0 +1,110 @@
+<p><a href="http://en.wikipedia.org/wiki/Syntax_highlighting">Syntax highlighting</a> is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.</p>
+
+<h3 id="pygments-code-blocks">Pygments Code Blocks</h3>
+
+<p>To modify styling and highlight colors edit <code>/assets/less/pygments.less</code> and compile <code>main.less</code> with your favorite preprocessor. Or edit <code>main.css</code> if that’s your thing, the classes you want to modify all begin with <code>.highlight</code>.</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nf">#container</span> <span class="p">{</span>
+    <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="m">-240px</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Line numbering enabled:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="lineno">1</span> <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">&quot;pagination&quot;</span> <span class="na">role=</span><span class="s">&quot;navigation&quot;</span><span class="nt">&gt;</span>
+<span class="lineno">2</span>     {% if page.previous %}
+<span class="lineno">3</span>         <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ site.url }}{{ page.previous.url }}&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">title=</span><span class="s">&quot;{{ page.previous.title }}&quot;</span><span class="nt">&gt;</span>Previous article<span class="nt">&lt;/a&gt;</span>
+<span class="lineno">4</span>     {% endif %}
+<span class="lineno">5</span>     {% if page.next %}
+<span class="lineno">6</span>         <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ site.url }}{{ page.next.url }}&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">title=</span><span class="s">&quot;{{ page.next.title }}&quot;</span><span class="nt">&gt;</span>Next article<span class="nt">&lt;/a&gt;</span>
+<span class="lineno">7</span>     {% endif %}
+<span class="lineno">8</span> <span class="nt">&lt;/nav&gt;</span><span class="c">&lt;!-- /.pagination --&gt;</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
+  <span class="k">class</span> <span class="nc">TagIndex</span> <span class="o">&lt;</span> <span class="no">Page</span>
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span>
+      <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
+      <span class="vi">@base</span> <span class="o">=</span> <span class="n">base</span>
+      <span class="vi">@dir</span> <span class="o">=</span> <span class="n">dir</span>
+      <span class="vi">@name</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;tag_index.html&#39;</span><span class="p">)</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;tag&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">tag</span>
+      <span class="n">tag_title_prefix</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;tag_title_prefix&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;Tagged: &#39;</span>
+      <span class="n">tag_title_suffix</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;tag_title_suffix&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;&amp;#8211;&#39;</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">tag_title_prefix</span><span class="si">}#{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;description&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;An archive of posts tagged </span><span class="si">#{</span><span class="n">tag</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<h3 id="standard-code-block">Standard Code Block</h3>
+
+<pre><code>&lt;nav class="pagination" role="navigation"&gt;
+    {% if page.previous %}
+        &lt;a href="{{ site.url }}{{ page.previous.url }}" class="btn" title="{{ page.previous.title }}"&gt;Previous article&lt;/a&gt;
+    {% endif %}
+    {% if page.next %}
+        &lt;a href="{{ site.url }}{{ page.next.url }}" class="btn" title="{{ page.next.title }}"&gt;Next article&lt;/a&gt;
+    {% endif %}
+&lt;/nav&gt;&lt;!-- /.pagination --&gt;
+</code></pre>
+
+<h3 id="fenced-code-blocks">Fenced Code Blocks</h3>
+
+<p>To modify styling and highlight colors edit <code>/assets/less/coderay.less</code> and compile <code>main.less</code> with your favorite preprocessor. Or edit <code>main.css</code> if that’s your thing, the classes you want to modify all begin with <code>.coderay</code>. Line numbers and a few other things can be modified in <code>_config.yml</code> under <code>coderay</code>.</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#33D;font-weight:bold">#container</span> {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    <span style="color:#606">float</span>: <span style="color:#088">left</span>;
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    <span style="color:#606">margin</span>: <span style="color:#60E">0</span> <span style="color:#60E">-240px</span> <span style="color:#60E">0</span> <span style="color:#60E">0</span>;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    <span style="color:#606">width</span>: <span style="color:#60E">100%</span>;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>}
+</pre></div>
+</div>
+</div>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#070;font-weight:bold">&lt;nav</span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">pagination</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">role</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">navigation</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    {% if page.previous %}
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>        <span style="color:#070;font-weight:bold">&lt;a</span> <span style="color:#b48">href</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">{{ site.url }}{{ page.previous.url }}</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">btn</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">title</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">{{ page.previous.title }}</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>Previous article<span style="color:#070;font-weight:bold">&lt;/a&gt;</span>
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    {% endif %}
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    {% if page.next %}
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>        <span style="color:#070;font-weight:bold">&lt;a</span> <span style="color:#b48">href</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">{{ site.url }}{{ page.next.url }}</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">btn</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">title</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">{{ page.next.title }}</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>Next article<span style="color:#070;font-weight:bold">&lt;/a&gt;</span>
+<span class="line-numbers"><a href="#n7" name="n7">7</a></span>    {% endif %}
+<span class="line-numbers"><a href="#n8" name="n8">8</a></span><span style="color:#070;font-weight:bold">&lt;/nav&gt;</span><span style="color:#777">&lt;!-- /.pagination --&gt;</span>
+</pre></div>
+</div>
+</div>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Jekyll</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">TagIndex</span> &lt; <span style="color:#036;font-weight:bold">Page</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">initialize</span>(site, base, dir, tag)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>      <span style="color:#33B">@site</span> = site
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>      <span style="color:#33B">@base</span> = base
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>      <span style="color:#33B">@dir</span> = dir
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>      <span style="color:#33B">@name</span> = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">index.html</span><span style="color:#710">'</span></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>      <span style="color:#069">self</span>.process(<span style="color:#33B">@name</span>)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span style="color:#069">self</span>.read_yaml(<span style="color:#036;font-weight:bold">File</span>.join(base, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">_layouts</span><span style="color:#710">'</span></span>), <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tag_index.html</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>      <span style="color:#069">self</span>.data[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tag</span><span style="color:#710">'</span></span>] = tag
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>      tag_title_prefix = site.config[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tag_title_prefix</span><span style="color:#710">'</span></span>] || <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Tagged: </span><span style="color:#710">'</span></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>      tag_title_suffix = site.config[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tag_title_suffix</span><span style="color:#710">'</span></span>] || <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&amp;#8211;</span><span style="color:#710">'</span></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>      <span style="color:#069">self</span>.data[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">title</span><span style="color:#710">'</span></span>] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>tag_title_prefix<span style="font-weight:bold;color:#666">}</span></span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>tag<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>      <span style="color:#069">self</span>.data[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">description</span><span style="color:#710">'</span></span>] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">An archive of posts tagged </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>tag<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">.</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span style="color:#080;font-weight:bold">end</span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>  <span style="color:#080;font-weight:bold">end</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span style="color:#080;font-weight:bold">end</span>
+</pre></div>
+</div>
+</div>
+
+<h3 id="github-gist-embed">GitHub Gist Embed</h3>
+
+<p>An example of a Gist embed below.</p>
+
+<script src="https://gist.github.com/mmistakes/6589546.js"> </script>
+
+<script src="https://gist.github.com/8531391.js"> </script>
+

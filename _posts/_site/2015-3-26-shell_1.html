@@ -1,0 +1,241 @@
+<h1 id="shell--1">Shell 脚本学习笔记-1</h1>
+
+<p>标签：Shell</p>
+
+<hr />
+
+<p>最近因为项目需要学习Shell脚本，做一个学习笔记。</p>
+
+<hr />
+
+<p>有需求：</p>
+
+<blockquote>
+  <p>空密码监测，监测具有空口令的账户，并为其设定密码。</p>
+</blockquote>
+
+<p><strong>流程：</strong></p>
+
+<blockquote>
+  <p>监测空密码用户</p>
+</blockquote>
+
+<p><code>
+for line in `cat /etc/shadow`;do
+    passwd=`echo $line | cut -d ":" -f2`
+    usr_name=`echo $line | cut -d ":" -f1`
+    if [ $passwd == "!" ] &amp;&gt; /dev/null;then
+        ... ...
+    fi
+done
+</code></p>
+
+<blockquote>
+  <p>过滤出普通用户且未设置密码</p>
+</blockquote>
+
+<p><code>
+... ...
+ linedata=`egrep "^\b${usr_name}\b" /etc/passwd`
+        uuid=`echo $linedata | cut -d ":" -f3`
+        if [ $uuid -gt 500 ] &amp;&amp; [ $usr_name != "nobody" ];then
+            ... ...
+        fi
+... ...
+</code></p>
+
+<blockquote>
+  <p>生成密码
+填入/etc/shadow中</p>
+</blockquote>
+
+<p><code>
+... ...
+cipher=`openssl passwd -1 -salt $(&lt; /dev/urandom tr -dc '[:alnum:]' | head -c 32)`
+sed "s/$usr_name:!/$usr_name:$cipher/" -i passwd
+... ...
+</code></p>
+
+<p>完整的脚本：</p>
+
+<p><code>shell
+#!/bin/bash
+for line in `cat /etc/shadow`;do
+    passwd=`echo $line | cut -d ":" -f2`
+    usr_name=`echo $line | cut -d ":" -f1`
+    if [ $passwd == "!" ] &amp;&gt; /dev/null;then
+        linedata=`egrep "^\b${usr_name}\b" /etc/passwd`
+        uuid=`echo $linedata | cut -d ":" -f3`
+        if [ $uuid -gt 500 ] &amp;&amp; [ $usr_name != "nobody" ];then
+            echo "setting $usr_name passwd"
+            cipher=`openssl passwd -1 -salt $(&lt; /dev/urandom tr -dc '[:alnum:]' | head -c 32)`
+            sed "s/$usr_name:!/$usr_name:$cipher/" -i /etc/passwd
+        fi
+    fi
+done
+</code></p>
+
+<hr />
+
+<h2 id="cut">cut命令</h2>
+<p>cut是一个帮助我们将文本按照列进行切分的工具。它可以指定分隔每列的的定界符。分割后的每列被称为一个<strong>字段</strong>。
+提取特定的列：</p>
+
+<p><code>cut -f FIELD_LIST filename</code>
+<code>cut -f 2,3 filename</code></p>
+
+<p>例子：</p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ cat tar
+No  Name    Mark    Percent
+1   Sarath  45      90
+2   Alex    49      98
+3   Anu     45      90
+</code></p>
+
+<p>使用：<code>cut -f1 tar</code>：</p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ cut -f1 tar
+No
+1
+2
+3
+</code></p>
+
+<p>cut也可以使用–complement选项来指定显示除某一列以外的其他内容，例如：
+使用：<code>cut -f3 --complement tar</code></p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ cut -f3 --complement tar
+No  Name    Percent
+1   Sarath  90
+2   Alex    98
+3   Anu     90
+</code></p>
+
+<p>显示了出去Mark列以外的内容。
+cut命令也可以使用-d选项来制定定界符，对于内容：</p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ cat tar1
+No;Name;Mark;Percent
+1;Sarath;45;90
+2;Alex;49;98
+3;Anu;45;90
+</code></p>
+
+<p>使用命令：<code>cut -f1 -d ";" tar1</code>指定使用“；”作为定界符并输出第一列：</p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ cut -f1 -d ";" tar1
+No
+1
+2
+3
+</code></p>
+
+<hr />
+
+<h2 id="grep-egrep">grep egrep命令</h2>
+<p><strong>grep命令</strong>
+grep可以搜索指定文件中的特定模式的文本行，亦可以从stdin中读取。
+例如对于文本内容：</p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ cat tar
+No  Name    Mark    Percent
+1   Sarath  45      90
+2   Alex    49      98
+3   Anu     45      90
+</code></p>
+
+<p>使用命令<code>grep Name tar</code>搜索文件tar中的包含Name的行：
+<code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ grep Name tar
+No  Name    Mark    Percent
+</code></p>
+
+<p>使用命令<code>cat tar | grep Name</code>搜索来自stdin中的包含Name的行：</p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ cat tar | grep Name
+No  Name    Mark    Percent
+</code></p>
+
+<p>使用命令<code>grep -v Name tar</code>输出不包含Name的内容：</p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ grep -v Name tar
+1   Sarath  45  90
+2   Alex    49  98
+3   Anu 45  90
+</code></p>
+
+<p><strong>egrep命令</strong>
+使用<code>egrep</code>命令来匹配正则表达式，使用命令<code>egrep "[a-z]+" tar</code>来匹配所有字母
+当然你也可以使用<code>grep -E</code>来实现相同的功能。</p>
+
+<p>对于我写的脚本中的<code>egrep "^\b${usr_name}\b" /etc/passwd</code>也就是在/etc/passwd中匹配符合正则表达式^\b${用户名}\b的行。
+而正则表达式中^代表匹配行首，第一个\b和第二个\b分别代表词首词尾，也就是匹配在行首的且完全匹配“用户名”的行，完全匹配也就是指对于匹配模式test来说test1不能匹配。</p>
+
+<hr />
+
+<h2 id="sed">sed命令</h2>
+<p>sed是流编辑器(stream editor)的缩写。能够配合正则表达式使用，功能强大。
+sed可以替换指定文本中的字符串：
+<code>sed 's/pattern/replace_string/' file</code>
+<code>cat file | sed 's/pattern/replace_string/</code>
+例如命令：</p>
+
+<p><code>echo this is an example | sed 's/\w\+/[&amp;]/g'</code></p>
+
+<p>其中的正则表达式\w+匹配每一个单词然后使用[&amp;]进行替换，其中&amp;是已匹配到的字符串标记，结果：</p>
+
+<p><code>
+zhaonanyu@ZhaoStudio:~/projects/shell_std$ echo this is an example | sed 's/\w\+/[&amp;]/g'
+[this] [is] [an] [example]
+</code></p>
+
+<p>使用<code>sed 's/pattern/replace_string/' -i file</code>可以直接匹配替换文件中的指定字符串。
+上面我写的脚本中：<code>sed "s/$usr_name:!/$usr_name:$cipher/" -i /etc/passwd</code>这一行的意思也就明了了：
+将/etc/passwd中的<code>$usr_name:!</code>替换为<code>$usr_name:$cipher</code>，值得注意的是我使用的是双引号，因为里面出现了变量。</p>
+
+<hr />
+
+<h2 id="awk">awk命令</h2>
+<p>awk是一款设计用于数据流的工具。awd内建许多功能，如数组、函数等，非常灵活。
+awk的基本结构如下：</p>
+
+<p><code>awk ' BEGIN{ print "start" } pattern { commands } END{ print "end" } file</code></p>
+
+<p>awk每次从指定文件中读取一行
+awk中可以使用循环，也可以使用函数，例如对于判定是否存在密码为空的用户，可以判断在/etc/shadow文件中的第二个字段是否为“！”：</p>
+
+<p><code>cat /etc/shadow | awk '{split($0,a,":");if (a[2]=="!") print a[1] fi}'</code></p>
+
+<p>其中使用了split()函数：
+split(string, array, delimiter)
+该函数使用定界符delimiter生成一个字符串数组存入array中，在上面的判定空密码的命令中使用“：”作为定界符，而每行的第二个字段即为a[2]</p>
+
+<hr />
+
+<h2 id="section">密码生成命令的解释</h2>
+
+<h3 id="section-1">盐</h3>
+
+<p><strong><em>盐（Salt），在密码学中，是指通过在密码任意固定位置插入特定的字符串，让散列后的结果和使用原始密码的散列结果不相符，这种过程称之为“加盐”。 —— WikiPedia</em></strong>
+对于我写的生成密码的脚本：</p>
+
+<p><code>openssl passwd -1 -salt $(&lt; /dev/urandom tr -dc '[:alnum:]' | head -c 32)</code></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>生成命令需要用到openssl工具集，对于openssl命令passwd选项用于指示生成密码，-1用于指定加密方式即MD5加密，-salt用于指定盐$(&lt; /dev/urandom tr -dc ‘[:alnum:]’</td>
+      <td>head -c 32)，盐使用/dev/urandom伪随机生成器生成，使用tr -dc ‘[:alnum:]’命令来去除要生成的盐中的字母项，最后使用head命令取32位字符作为盐。</td>
+    </tr>
+  </tbody>
+</table>
+

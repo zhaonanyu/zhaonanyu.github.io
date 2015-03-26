@@ -1,0 +1,159 @@
+<p>Folow me: <i class="icon-github icon-2x"></i>  <a href="http://github.com/zhaonanyu">zhaonanyu</a>
+Contact me: <strong>zhaonanyu@gmail.com</strong></p>
+
+<hr />
+
+<blockquote>
+  <p><strong>下半部</strong>
+<em>下半部的任务就是执行与终端处理密切相关但中断处理程序本身不执行的工作。在理想的情况下，最好是中断处理程序将所有工作都交给下半部分执行，因为我们希望在终端处理程序中完成的工作越少越好（也就是越快乐好）。我们抢终端处理程序能够尽可能快地返回。</em>——<strong><em>《Linux内核设计与实现》</em></strong></p>
+</blockquote>
+
+<h2 id="section">软中断</h2>
+<p>软中断是利用<a href="http://baike.baidu.com/view/486976.htm">硬件中断</a>的概念，用软件凡是进行模拟，实现宏观上的异步效果。<strong>很多情况下，软中断和信号有些类似</strong>，同时软中断又是和硬件中断相对应的。</p>
+
+<p><strong>软中断</strong>于2.3中和<strong>tasklet</strong>一同被引入。软中断是一组静态定义的下半部接口，有32个，<strong>同类型的软中断可以在同多个处理器上同时执行</strong>。这样会出现一个问题，如果<strong>同一个</strong>软中断在它被执行的同时<strong>再次被触发了</strong>，另一个处理器将执行这个触发，这样表示任何共享的数据都需要加<strong>锁</strong>。另外软中断处理程序执行的时候，允许相应终端，但它自己不能休眠。**也就是说如果cpu0上运行的软中断被中断时，当前处理器将不再处理别的软中断，其他的软中断仍可以在别的处理器上执行。</p>
+
+<p>上面我们也了解到软中断作为下半部的一种实现方式用起来很麻烦，这也就是tasklet受青睐的原因。但是需要明确的一点是<strong>tasklet是通过软中断实现的</strong>。</p>
+
+<h3 id="section-1">了解软中断</h3>
+<p>软中断是在<strong>编译期间静态分配</strong>的，软中断由softirq_action结构表示：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#777">// located in /linux/Interrupt.h</span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">struct</span> softirq_action
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>{
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>        <span style="color:#088;font-weight:bold">void</span>        (*action)(<span style="color:#080;font-weight:bold">struct</span> softirq_action *);
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>};
+</pre></div>
+</div>
+</div>
+
+<p>《Linux内核设计与实现》中说明了：</p>
+
+<blockquote>
+  <p>kernel/softirq.c中定义了一个包含32个该结构体的数组。</p>
+</blockquote>
+
+<blockquote>
+  <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#088;font-weight:bold">static</span> <span style="color:#080;font-weight:bold">struct</span> softirq_action softirq_vec[NR_SOFTIRQS];
+</pre></div>
+</div>
+  </div>
+</blockquote>
+
+<p>每个被注册的软终端都占据该数组的一项，因此最多可能有32个软中断。注意，这是一个定值——注册的软中断数目的最大值没法动态改变。<strong>在当前版本的内核中，这32个项目中只会用到9个</strong>。</p>
+
+<p><strong>事实上</strong>在现在的版本（3.17）中，软中断的类型已经变为10种：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#777">// located in /linux/Interrupt.h</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#777">/* PLEASE, avoid to allocate new softirqs, if you need not _really_ high</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#777">   frequency threaded job scheduling. For almost all the purposes</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#777">   tasklets are more than enough. F.e. all serial device BHs et</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="color:#777">   al. should be converted to tasklets, not to softirqs.</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#777"> */</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#080;font-weight:bold">enum</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>{
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        HI_SOFTIRQ=<span style="color:#00D">0</span>,
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        TIMER_SOFTIRQ,
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        NET_TX_SOFTIRQ,
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        NET_RX_SOFTIRQ,
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        BLOCK_SOFTIRQ,
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        BLOCK_IOPOLL_SOFTIRQ,
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        TASKLET_SOFTIRQ,
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        SCHED_SOFTIRQ,
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>        HRTIMER_SOFTIRQ,
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        RCU_SOFTIRQ,    <span style="color:#777">/* Preferable RCU should always be the last softirq */</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        NR_SOFTIRQS
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>};
+</pre></div>
+</div>
+</div>
+
+<p>软中断具体的调度和执行在这里就不再详细描述了，注册一个软中断后，在得到调度（或说是触发）时，软中断将会在do_softirq()这个函数中执行，do_irq()函数将会检查并执行所有待处理的软中断。</p>
+
+<blockquote>
+  <p><em><strong>关于do_irq</strong>
+do_irq()函数将会根据一个<strong>pending</strong>局部变量来判断该软中断为何种类型，然后调用相应的处理函数（action）来处理该软中断。</em></p>
+</blockquote>
+
+<hr />
+
+<h2 id="tasklet">tasklet</h2>
+<p>tasklet和软中断本质上很类似，但是接口也更简单，对于<strong>锁保护</strong>的要求更低。
+tasklet是通过软中断来实现的，tasklet实际上也是一种软中断。回过头来看一下前面提到的软中断目前的10中类型：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">软中断类型</th>
+      <th style="text-align: center">优先级</th>
+      <th style="text-align: center">描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">HI_SOFTIRQ</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">高优先级tasklet</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TIMER_SOFTIRQ</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">时钟</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">NET_TX_SOFTIRQ</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">发送网络数据包</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">NET_RX_SOFTIRQ</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">接受网络数据包</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">BLOCK_SOFTIRQ</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">块设备</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">BLOCK_IOPOLL_SOFTIRQ</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center"><em>新增的不知道啥意思XD</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TASKLET_SOFTIRQ</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">普通优先级tasklet</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SCHED_SOFTIRQ</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">调度器</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">HRTIMER_SOFTIRQ</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">高精度时钟</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">RCU_SOFTIRQ</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">RCU锁</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>可以看到其中有两种类型的软中断和tasklet有关，或者说tasklet是一种软中断，分为<strong>HI_SOFTIRQ和TASKLET_SOFTIRQ两种</strong>。</p>
+
+<hr />
+<p><strong>总结</strong>：
+tasklet的具体实现目前还没有搞太懂，就不描述了。
+另外陈老师在翻译《Linux内核设计与实现》时有个大错误XD：<em>p113 表8-2应该是<strong>软中断类型表</strong></em></p>
+
