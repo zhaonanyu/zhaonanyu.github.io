@@ -9,7 +9,7 @@ comments: true
 #Inodes
 是时候编写一些inode的功能了。我们再来看看fs.h中的`struct inode_operations`结构：
 
-```c
+~~~c
 struct inode_operations {
         int (*create) (struct inode *,struct dentry *,int);
         struct dentry * (*lookup) (struct inode *,struct dentry *);
@@ -29,7 +29,7 @@ struct inode_operations {
         int (*setattr) (struct dentry *, struct iattr *);
         int (*getattr) (struct dentry *, struct iattr *);
 };
-```
+~~~
 
 考虑到我们这个是一个只读文件系统，接下来的工作应该不难。在romfs中只实现了上面之中的一个函数——`lookup`，但是我们为了保险起见还是都来看一下。
 
@@ -39,14 +39,14 @@ struct inode_operations {
 
 现在剩下什么？只有`lookup`函数了。在romfs和ramfs都是这样做的，不过我目前仍然不是太明白。我们来看看ramfs里面：
 
-```c
+~~~c
  d_add(dentry, NULL);
 return NULL;
-```
+~~~
 
 看来是dentry把inode传递过来，添加到dentry cache中，然后返回一个NULL。继续阅读romfs的代码，它又多干了一些事情。** It gets the name of the filename we're interested in from the dentry object passed in, at it checks for it in the directory specified by the inode passed in. **如果它在文件夹中找到了入口的名字，他会将入口的inode以及dentry加入dentry cache中。在romfs代码的注释中我们还可以了解到如果没有找到入口，应该调用`d_add()`返回一个NULL inode。我们遵循这个。
 
-```c
+~~~c
 static struct dentry *staticfs_lookup(struct inode *dir, struct dentry *dentry) {
   int ino;
   struct inode *inode;
@@ -73,13 +73,13 @@ static struct dentry *staticfs_lookup(struct inode *dir, struct dentry *dentry) 
   d_add(dentry,inode);
   return NULL;
 }
-```
+~~~
 
 喔，这还真是不少的代码！我假设传入的inode已经被确认为文件夹，所以我们就不检查他了。这也就是说他如果不是inode 0也就是根文件夹，他就是inode 2也就是b文件夹。鉴于我们的文件夹入口是静态的，我们还没有是么可以用来比对的记录，我们就只有一个定制的开关。如果正确的名字出现在正确的地方的话，我们就把`ino`指向inode号所对应的文件。如果开关返回的是-1我们就将inode设定为NULL。
 
 重新阅读一遍ramfs和romfs中的注释，我想我终于搞懂了。romfs中：
 
-```c
+~~~c
  /*
          * it's a bit funky, _lookup needs to return an error code
          * (negative) or a NULL, both as a dentry.  ENOENT should not
@@ -88,26 +88,26 @@ static struct dentry *staticfs_lookup(struct inode *dir, struct dentry *dentry) 
          * (Although as I see, it only matters on writable file
          * systems).
          */
-```
+~~~
 
 ramfs中：
 
-```c
+~~~c
 /*
  * Lookup the data. This is trivial - if the dentry didn't already
  * exist, we know it is negative.
  */
-```
+~~~
 
 其中的"negative"解决了我的疑惑。一个negative dentry。ramfs中说“如果它现在不存在”，说明他就不存在与dentry cache中。dentry cache是ramfs的一个快照，如果它不存在于dentry cache中，说明他并不是来自于这个session中的，如果它来自于这个session中，那么他就也会存在于dentry cache中。**This means it can just take any dentry given and throw it away, **如果VFS发出请求，他也不在那。romfs需要多做一些工作，因为貌似VFS并不涉及一个已存在的文件。
 
 既然我们inode相关所有的函数都写好了（实际上就一个），我们现在就来组装我们的`struct inode_operations`。
 
-```c
+~~~c
 static struct inode_operations staticfs_inode_operations = {
   lookup:staticfs_lookup,
 };
-```
+~~~
 
 inode也大功告成了！
 
