@@ -36,7 +36,7 @@ comments: true
 $sudo apt-get install ruby1.9.1-dev
 ~~~
 
-当然你也需要**javascript**的运行时:
+当然你也需要安装**NodeJS**:
 
 ~~~shell
 $sudo apt-get install NodeJS
@@ -48,7 +48,7 @@ $sudo apt-get install NodeJS
 $sudo gem install jekyll
 $jekyll new my-awsome-site
 $cd my-awsome-site
-~/my-awsome-site$ jekyll serce
+~/my-awsome-site$ jekyll serve
 ~~~
 
 完成上面的命令以后你就可以用你的浏览器访问http://localhost:4000来测试你的测试页面了.*see? simple*
