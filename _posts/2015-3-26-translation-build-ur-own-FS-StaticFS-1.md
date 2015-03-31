@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "如何编写一个Linux VFS 文件系统模块-StaticFS-1"
-description: "every geek wants a blog all by himself lol"
-tags: [GitHub Pages, jekyll, static site generator]
+description: "translation-build your own FS"
+tags: [StaticFS, VFS, translation]
 comments: true
 ---
 

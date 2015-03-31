@@ -1,11 +1,11 @@
-
 ---
 layout: post
 title: "如何编写一个Linux VFS 文件系统模块-StaticFS-4"
-description: "every geek wants a blog all by himself lol"
-tags: [GitHub Pages, jekyll, static site generator]
+description: "translation-build your own FS"
+tags: [StaticFS, VFS, translation]
 comments: true
 ---
+
 
 下面是`s_op`和`dq_op`，一个脸熟一个不是那么熟。`s_op`用于存放我们的`struct super_operations`。`dq_op`是磁盘使用的操作，看起来都没有VFS模块会自己实现一个，所以我们假设在`/usr/src/linux/fs/dquot.c `里面的这个就够用了
 
