@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "如何编写一个Linux VFS 文件系统模块-StaticFS-6"
+title: "如何编写一个Linux VFS 文件系统模块-StaticFS-7"
 description: "translation-build your own FS"
 tags: [StaticFS, VFS, translation]
 comments: true
