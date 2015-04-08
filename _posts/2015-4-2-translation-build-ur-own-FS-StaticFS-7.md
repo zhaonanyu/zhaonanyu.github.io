@@ -71,6 +71,8 @@ romfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 
 让我们开始写。
 
+<!--more-->
+
 ~~~c
 static int staticfs_readdir(struct file *fp, void *dirent, filldir_t filldir) {
   struct inode *i=fp->f_dentry->d_inode;
